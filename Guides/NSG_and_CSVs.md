@@ -34,6 +34,17 @@ NSG preprocessing can be performed which can generate the final set of NSG rules
 Some of the nice to haves are 
 - Taking away the need to hard code Virtual Network address ranges or Subnet Address ranges, thus making the NSG ruleset environment agnostic as well. 
 
+**Sample Global NSG CSV layout:**
+
+|Column Name|Description|
+|--|--|
+
+**Sample Subscription NSG CSV layout:**
+|Column Name|Description|
+|--|--|
+|Vnet|Name of Virtual Network|
+|NSG|Name of Network Security Group|
+
 
 # Advantages:
 - Limits the number of changes user had to make for company wide rules. There is just one Global CSV file to edit and maintain.  
