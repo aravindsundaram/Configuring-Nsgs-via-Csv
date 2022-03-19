@@ -28,9 +28,17 @@ Even at a Subscription level, there can be requirements to have a common set of 
 NSG preprocessing can be performed using Powershell scripts or any scripting language which can generate the final set of NSG rules by manipulating these CSV files. Some of the important logic needs to be built in this preprocessing script are as follows. 
 
 - Handling Global NSG rules and Subscription level NSG rules 
+
 - Generalising NSG rules at a Virtual Network or across all Virtual networks i.e Subnets for a chosen Subscription 
-- Multi region NSG rules. Having a single NSG rule to apply for Vnets/Subnets of both regions. 
-- Taking away the need to hard code Virtual Network address ranges or Subnet Address ranges, thus making the NSG ruleset environment agnostic as well. 
+  - Usage of string "**allnsg**" instead of NSG name can apply NSG rules to all NSGs of Vnet
+- Multi region NSG rules. Having a single NSG rule to apply for Vnets/Subnets of both regions.
+  - If the NSG name has a region string in it eg: aue/aus. This can be left as **xxx** instead of region label. Preprocessing script can apply the same rule for both AUE and AUS NSGs. 
+  - Same applies for Virtual Network as well. 
+- Taking away the need to hard code Virtual Network address ranges or Subnet Address ranges, thus making the NSG ruleset environment agnostic as well.
+  - Special strings such as "**subnetrange**" or "**vnetrange**" can be used to dynamically populate the address spaces for Vnet and subnet. 
+  - Whereas "**vnetmatch**" and "**subnetmatch**" to dynamically populate the address spaces of Vnet or Subnet in Secondary region. 
+  - If Subnet A needs to talk to Subnet B, instead of mentioning address spaces you can use the name of subnet prefixed and suffixed by double underscores. 
+  - All these eliminates the hardcodings and makes it environment agnostic. 
 - Preprocessing script can either directly update the Azure NSGs through powershell cmdlets or az cli commands 
 - Alternatively, it can produce an output in forms of JSON similar to code base and this built JSON file can be fed to usual deployment pipelines. 
 
@@ -53,6 +61,19 @@ NSG preprocessing can be performed using Powershell scripts or any scripting lan
 |protocol                   | Name of Protocol. Eg: TCP , * for any  |
 |action                     | Allow or Deny |
 
+**Sample Subscription NSG file**
+
+
+**Expanded NSG view**
+
+
+## **Note: NSG vs Vnet dependency**
+ 
+As per deployment dependencies, the NSGs are oftent deployed first followed by Virtual Network as Subnet and NSG association is usually performed in Virtual Network deployment.
+ 
+The special capabilities of preprocessing script to dynamically fetch IP ranges of subnet,vnet and apply rule across all NSGs with "allnsg" tag will only work if Vnet is created already and Subnet-NSG association is done
+ 
+**Hence for a brand new creation of NSG,VNET etc, the NSGs have to be deployed again once the VNet and subnets are created for the special NSG rules with subnetrange,vnetrange, allnsg to apply.**
 
 # Advantages:
 - Limits the number of changes user had to make for company wide rules. There is just one Global CSV file to edit and maintain.  
