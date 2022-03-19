@@ -34,7 +34,7 @@ NSG preprocessing can be performed using Powershell scripts or any scripting lan
 - Preprocessing script can either directly update the Azure NSGs through powershell cmdlets or az cli commands 
 - Alternatively, it can produce an output in forms of JSON similar to code base and this built JSON file can be fed to usual deployment pipelines. 
 
-**Sample Global NSG CSV layout:**
+**Sample NSG CSV layout:**
 
 |Column Name|Description|
 |--|--|
