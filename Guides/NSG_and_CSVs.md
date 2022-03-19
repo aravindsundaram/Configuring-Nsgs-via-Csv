@@ -25,25 +25,33 @@ Even at a Subscription level, there can be requirements to have a common set of 
 
 # How do we make this happen?
 
-NSG preprocessing can be performed which can generate the final set of NSG rules by manipulating these CSV files. Some of the important logic needs to be built in this preprocessing script are as follows. 
+NSG preprocessing can be performed using Powershell scripts or any scripting language which can generate the final set of NSG rules by manipulating these CSV files. Some of the important logic needs to be built in this preprocessing script are as follows. 
 
-- Handle Global NSG rules and Subscription level NSG rules 
+- Handling Global NSG rules and Subscription level NSG rules 
 - Generalising NSG rules at a Virtual Network or across all Virtual networks i.e Subnets for a chosen Subscription 
 - Multi region NSG rules. Having a single NSG rule to apply for Vnets/Subnets of both regions. 
-
-Some of the nice to haves are 
 - Taking away the need to hard code Virtual Network address ranges or Subnet Address ranges, thus making the NSG ruleset environment agnostic as well. 
+- Preprocessing script can either directly update the Azure NSGs through powershell cmdlets or az cli commands 
+- Alternatively, it can produce an output in forms of JSON similar to code base and this built JSON file can be fed to usual deployment pipelines. 
 
 **Sample Global NSG CSV layout:**
 
 |Column Name|Description|
 |--|--|
-
-**Sample Subscription NSG CSV layout:**
-|Column Name|Description|
-|--|--|
-|Vnet|Name of Virtual Network|
-|NSG|Name of Network Security Group|
+|vnet                       | Name of Vnet. **Only in Subscription file** |
+|nsg                        | Name of NSG parameter file. **Only in Subscription file**  |
+|direction                  | Inbound/Outbound |
+|priority                   | Rule Priority |
+|rulename                   | Name of Rule |
+|description                | Description of Rule |
+|sourceAddressPrefix        | ServiceTag Or IP(s)/IP range(s) separated by Commas. Blanks if none |
+|sourcePortRange            | Port or Ports separated by Commas. * if any |
+|destinationAddressPrefix   | ServiceTag Or IP(s)/IP range(s) separated by Commas. Blanks if none.|
+|destinationPortRange       | Port or Ports separated by Commas. * if any |
+|sourceASG                  | Name of ASG. Blanks if none |
+|destASG                    | Name of ASG. Blanks if none |
+|protocol                   | Name of Protocol. Eg: TCP , * for any  |
+|action                     | Allow or Deny |
 
 
 # Advantages:
