@@ -14,9 +14,6 @@ param (
         $SubscriptionNSGPath,
         [Parameter(Mandatory=$true)]
         [string]
-        $envtlabel,
-        [Parameter(Mandatory=$true)]
-        [string]
         $rgname
 )
 
