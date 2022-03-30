@@ -1,3 +1,37 @@
 
 on: 
  workflow_dispatch 
+
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      #Login to Azure
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+        # Create secret by AZURE_CREDENTIALS which is SPN used by Github. 
+         creds: ${{secrets.AZURE_CREDENTIALS}}
+         # Set this value to true to enable Azure PowerShell Login in addition to Az CLI login
+         enable-AzPSSession: true
+   
+      - name: Azure PowerShell file script
+        uses: Azure/powershell@v1
+        with:
+        # Specify the Az PowerShell script here.
+          inlineScript: |
+            .\Scripts\NSGPreprocessing.ps1 -ParamJsonPath '.\Parameters\' -Paramfilename 'Nsg.parameters.json'  -GlobalNSGPath '.\Parameters\GlobalNSG.csv' -SubscriptionNSGPath '.\Parameters\subscriptionNSG.csv' -rgname 'arav-rg-aue-nsgcsv'
+          # Azure PS version to be used to execute the script, example: 1.8.0, 2.8.0, 3.4.0. To use the latest version, specify "latest".
+          azPSVersion: latest
+          # Select the value of the ErrorActionPreference variable for executing the script. Options: stop, continue, silentlyContinue. Default is Stop.
+          errorActionPreference: stop # optional, default is Stop
+          # If this is true, this task will fail if any errors are written to the error pipeline, or if any data is written to the Standard Error stream.
+          failOnStandardError: true # optional, default is false
