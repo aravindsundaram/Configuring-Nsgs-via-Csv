@@ -1,1 +1,12 @@
 
+direction|priority|rulename|description|sourceAddressPrefix|sourcePortRange|destinationAddressPrefix|destinationPortRange|sourceASG|destASG|protocol|action
+Outbound|100|Allow_Storage_AUE|Allow_ASR_Storage_AUE|*|*|Storage.AustraliaEast|443|||TCP|Allow
+Outbound|110|Allow_Storage_AUSE|Allow_ASR_Storage_AUSE|*|*|Storage.AustraliaSoutheast|443|||TCP|Allow
+Inbound|100|Allow_OnPrem_Inbound|Allow_OnPrem_Inbound|10.10.0.0/16,172.0.0.0/16|*|VirtualNetwork|*|||*|Allow
+Inbound|110|Allow_Azure_Monitor_Inbound|Allow_Azure_Monitor_Inbound|AzureMonitor|*|VirtualNetwork|*|||*|Allow
+Inbound|120|Allow_Azure_App_Insights_Inbound|Allow_Azure_App_Insights_Inbound|ApplicationInsightsAvailability|*|VirtualNetwork|*|||*|Allow
+Inbound|130|Allow_Azure_Action_Group_Inbound|Allow_Azure_Action_Group_Inbound|ActionGroup|*|VirtualNetwork|*|||*|Allow
+Outbound|200|Allow_Internet_Outbound|Allow_Internet_Outbound|*|*|Internet|443,80|||TCP|Allow
+Outbound|210|Allow_OnPrem_Outbound|Allow_OnPrem_Outbound|VirtualNetwork|*|110.10.0.0/16,172.0.0.0/16|*|||*|Allow
+Inbound|3000|Default_Deny_From_VNET_Inbound|Default_Deny_From_VNET_Inbound|vnetrange|*|vnetrange|*|||*|Deny
+Outbound|3020|Default_Deny_From_VNET_Outbound|Default_Deny_From_VNET_Outbound|vnetrange|*|vnetrange|*|||*|Deny
