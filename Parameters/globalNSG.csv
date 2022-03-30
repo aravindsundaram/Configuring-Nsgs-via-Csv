@@ -1,4 +1,3 @@
-
 direction|priority|rulename|description|sourceAddressPrefix|sourcePortRange|destinationAddressPrefix|destinationPortRange|sourceASG|destASG|protocol|action
 Outbound|100|Allow_Storage_AUE|Allow_ASR_Storage_AUE|*|*|Storage.AustraliaEast|443|||TCP|Allow
 Outbound|110|Allow_Storage_AUSE|Allow_ASR_Storage_AUSE|*|*|Storage.AustraliaSoutheast|443|||TCP|Allow
