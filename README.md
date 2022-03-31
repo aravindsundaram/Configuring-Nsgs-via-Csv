@@ -1,9 +1,5 @@
 # Configuring NSGs via CSV 
 
-This repository explains about the need to manage NSGs via CSV files with examples configuration and scripts. 
-
-# Why should you manage NSG rules through CSV? 
-
 Managing NSG rules through CSVs is widely recommended approach for better management. CSVs offers a grid view similar to Azure portal which is user friendly for any operations team. Unlike JSONs, CSVs are easy to edit and there is less hassle in managing it. 
 
 Visual code editor has quite a few extensions that can be utilized to manage and edit CSV files. Microsoft Excel is always available for old schoolers out there :)
