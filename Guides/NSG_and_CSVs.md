@@ -62,6 +62,7 @@ NSG preprocessing can be performed using Powershell scripts or any scripting lan
 |action                     | Allow or Deny |
 
 **Sample Subscription NSG file**
+<img width="1211" alt="image" src="https://user-images.githubusercontent.com/86707819/161137839-f39a7396-05d4-49aa-aa82-2f68b91aa851.png">
 
 
 **Expanded NSG view**
