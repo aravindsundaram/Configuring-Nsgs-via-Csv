@@ -1,15 +1,11 @@
 param nsgnames array
-param nsgrules array
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = [for nsgname in nsgnames: {
-  name: nsgname
-  location: resourceGroup().location
+param location string 
+
+resource nsgs 'Microsoft.Network/networkSecurityGroups@2021-05-01' = [for nsg in nsgnames: {
+  name: nsg.nsgName
+  location: location
   properties: {
-    securityRules: nsgrules
+     securityRules: nsg.rules
   }
-}]
-
-output nsgIds array = [for (nsgname, index) in nsgnames: {
-  name: nsg[index].name
-  resourceId: nsg[index].id
 }]
