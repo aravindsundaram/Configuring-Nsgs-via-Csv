@@ -1,0 +1,41 @@
+
+on: 
+  workflow_dispatch:
+    inputs:
+      resourceGroup:
+        description: 'Name of Resource Group'
+        default: 'arav-rg-aue-nsgcsv'
+        required: true
+      subscriptionId:
+        description: 'Provide Subscription ID'
+        default: '3d3c613c-3828-4c8d-bc51-8871f888c18e'
+        required: true
+      deployBicep:
+        description: 'Flag to deploy via Bicep'
+        default: 'Yes'
+        required: true
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with: 
+         creds: ${{secrets.AZURE_CREDENTIALS}}
+         enable-AzPSSession: true
+   
+      - name: Deploy Aus East
+        uses: Azure/arm-deploy@v1
+        with:
+         region: 'Australia East'
+         subscriptionId: '3d3c613c-3828-4c8d-bc51-8871f888c18e'
+         resourceGroupName: 'arav-rg-aue-nsgcsv'
+         deploymentName: 'nsg_east'
+         template: ./Bicep/nsg.bicep
+         parameters: ./Parameters/nsgs-aue.parameters.json 
+
