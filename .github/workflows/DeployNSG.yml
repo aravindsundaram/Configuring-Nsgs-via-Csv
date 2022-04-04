@@ -29,12 +29,13 @@ jobs:
          creds: ${{secrets.AZURE_CREDENTIALS}}
          enable-AzPSSession: true
    
-      - name: NSG Preprocessing 
-        uses: Azure/powershell@v1
+      - name: Deploy Aus East
+        uses: Azure/arm-deploy@v1
         with:
-          inlineScript: |
-            .\Scripts\NSGPreprocessing.ps1 -ParamJsonPath '.\Parameters\' -Paramfilename 'nsgs-aue.parameters.json'  -GlobalNSGPath '.\Parameters\GlobalNSG.csv' -SubscriptionNSGPath '.\Parameters\subscriptionNSG.csv' -rgname 'arav-rg-aue-nsgcsv'
-          azPSVersion: latest
-          errorActionPreference: stop 
-          failOnStandardError: true 
+         scope: subscription
+         region: 'Australia East'
+         subscriptionId: '3d3c613c-3828-4c8d-bc51-8871f888c18e'
+         deploymentName: 'nsg_east'
+         template: ./Bicep/nsg.bicep
+         parameters: ./Parameters/nsgs-aue.parameters.json 
 
