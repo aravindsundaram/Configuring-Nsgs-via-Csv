@@ -36,6 +36,6 @@ jobs:
          subscriptionId: '3d3c613c-3828-4c8d-bc51-8871f888c18e'
          resourceGroupName: 'arav-rg-aue-nsgcsv'
          deploymentName: 'nsg_east'
-         template: ./Bicep/nsg.bicep
-         parameters: ./Parameters/nsgs-aue.parameters.json 
+         template: /Bicep/nsg.bicep
+         parameters: /Parameters/nsgs-aue.parameters.json 
 
