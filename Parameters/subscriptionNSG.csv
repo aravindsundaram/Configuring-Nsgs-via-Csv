@@ -1,8 +1,8 @@
-vnet|nsg|direction|priority|rulename|description|sourceAddressPrefix|sourcePortRange|destinationAddressPrefix|destinationPortRange|sourceASG|destASG|protocol|action
-arav-vnt-xxx-01|allnsg|Inbound|400|Allow_Intrasubnet_Inbound|Allow_Intrasubnet_Inbound|subnetrange|*|*|*|||*|Allow
-arav-vnt-xxx-01|allnsg|Inbound|410|Allow_Bastion_Inbound|Allow_Bastion_Inbound|__AzureBastionSubnet__|*|*|*|||*|Allow
-arav-vnt-xxx-01|allnsg|Outbound|420|Allow_Intrasubnet_outbound|Allow_Intrasubnet_outbound|subnetrange|*|*|*|||*|Allow
-arav-vnt-xxx-01|arav-nsg-xxx-01-uat|Outbound|650|Matched_VNET_Outbound|Matched_VNET_Outbound|VirtualNetwork|*|vnetmatch|*|||TCP|Allow
-arav-vnt-xxx-01|arav-nsg-xxx-01-uat|Inbound|660|Matched_VNET_Inbound|Matched_VNET_Inbound|vnetmatch|*|VirtualNetwork|*|||TCP|Allow
-arav-vnt-xxx-01|arav-nsg-xxx-01-uatDB|Outbound|650|Matched_VNET_Outbound|Matched_VNET_Outbound|VirtualNetwork|*|vnetmatch|*|||TCP|Allow
-arav-vnt-xxx-01|arav-nsg-xxx-01-uatDB|Inbound|660|Matched_VNET_Inbound|Matched_VNET_Inbound|vnetmatch|*|VirtualNetwork|*|||TCP|Allow
+vnet,nsg,direction,priority,rulename,description,sourceAddressPrefix,sourcePortRange,destinationAddressPrefix,destinationPortRange,sourceASG,destASG,protocol,action
+arav-vnt-xxx-01,allnsg,Inbound,400,Allow_Intrasubnet_Inbound,Allow_Intrasubnet_Inbound,subnetrange,*,*,*,,,*,Allow
+arav-vnt-xxx-01,allnsg,Inbound,410,Allow_Bastion_Inbound,Allow_Bastion_Inbound,__AzureBastionSubnet__,*,*,*,,,*,Allow
+arav-vnt-xxx-01,allnsg,Outbound,420,Allow_Intrasubnet_outbound,Allow_Intrasubnet_outbound,subnetrange,*,*,*,,,*,Allow
+arav-vnt-xxx-01,arav-nsg-xxx-01-uat,Outbound,650,Matched_VNET_Outbound,Matched_VNET_Outbound,VirtualNetwork,*,vnetmatch,*,,,TCP,Allow
+arav-vnt-xxx-01,arav-nsg-xxx-01-uat,Inbound,660,Matched_VNET_Inbound,Matched_VNET_Inbound,vnetmatch,*,VirtualNetwork,*,,,TCP,Allow
+arav-vnt-xxx-01,arav-nsg-xxx-01-uatDB,Outbound,650,Matched_VNET_Outbound,Matched_VNET_Outbound,VirtualNetwork,*,vnetmatch,*,,,TCP,Allow
+arav-vnt-xxx-01,arav-nsg-xxx-01-uatDB,Inbound,660,Matched_VNET_Inbound,Matched_VNET_Inbound,vnetmatch,*,VirtualNetwork,*,,,TCP,Allow
